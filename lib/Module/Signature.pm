@@ -279,9 +279,11 @@ sub _verify_gpg {
     if( $? ) {
         print STDERR $output;
     }
-    elsif ($output =~ /((?: +[\dA-F]{4}){10,})/) {
-        warn "WARNING: This key is not certified with a trusted signature!\n";
-        warn "Primary key fingerprint:$1\n";
+    elsif ($output =~ /WARNING:.*\bkey\b.*\bnot\s+certified\b/imsx) {
+        if ($output =~ /((?:\s+[\dA-F]{4}){10,})/msx) {
+            warn "WARNING: This key is not certified with a trusted signature!\n";
+            warn "Primary key fingerprint:$1\n";
+        }
     }
 
     return SIGNATURE_BAD if ($? and $AutoKeyRetrieve);
