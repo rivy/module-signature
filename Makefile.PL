@@ -1,4 +1,5 @@
 use strict;
+use lib '.';
 use inc::Module::Install 0.92;
 
 $|++;
@@ -80,7 +81,7 @@ sub locate_gpg {
   		next unless $gpg_path;
   		next unless `$gpg_bin --version` =~ /GnuPG/;
   		next unless defined `$gpg_bin --list-public-keys`;
-  
+
   		$gpg = $gpg_bin;
   		last;
   	}
