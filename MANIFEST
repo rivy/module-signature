@@ -1,7 +1,5 @@
 .appveyor.yml
 .travis.yml
-ANDK2018.pub
-AUDREYT2018.pub
 AUTHORS
 Changes
 inc/Module/Install.pm
@@ -14,13 +12,15 @@ inc/Module/Install/Metadata.pm
 inc/Module/Install/Scripts.pm
 inc/Module/Install/Win32.pm
 inc/Module/Install/WriteAll.pm
+keys/ANDK2018.pub
+keys/AUDREYT2018.pub
+keys/NIKLASHOLM2018.pub
+keys/PAUSE2019.pub
 lib/Module/Signature.pm
 Makefile.PL
 MANIFEST			This list of files
 MANIFEST.SKIP
 META.yml
-NIKLASHOLM2018.pub
-PAUSE2019.pub
 README
 script/cpansign
 SIGNATURE
