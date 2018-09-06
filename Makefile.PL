@@ -51,8 +51,10 @@ if ( can_use('Crypt::OpenPGP') ) {
 	# Dive headlong into a full Crypt::OpenPGP install.
 	requires('Crypt::OpenPGP');
 } else {
-	# Ask the user what to do
-	ask_user();
+	if ( ! $ENV{AUTOMATED_TESTING} && ! $ENV{CI} ) {
+		# Ask the user what to do
+		ask_user();
+	} else { warn "Missing `gpg` and 'Crypt::OpenPGP', aborting setup/installation"; exit (255); }
 }
 
 unless ( can_run('diff') ) {
@@ -94,7 +96,7 @@ sub locate_gpg {
 
 	return 1 if grep { /^--installdeps/} @ARGV;
 
-	if ( prompt("Import PAUSE and author keys to GnuPG?", 'y' ) =~ /^y/i) {
+	if ( ! $ENV{AUTOMATED_TESTING} && ! $ENV{CI} && prompt("Import PAUSE and author keys to GnuPG?", 'y' ) =~ /^y/i) {
 		print 'Importing... ';
 		system $gpg, '--quiet', '--import', qw[ keys/AUDREYT2018.pub keys/ANDK2018.pub keys/PAUSE2019.pub keys/NIKLASHOLM2018.pub ];
 		print "done.\n";
